@@ -53,7 +53,6 @@ COPY --from=build-stage /webui/landing/ /var/www/app/landing
 RUN chown -R nginx:nginx /var/www
 
 RUN mkdir -p /etc/letsencrypt/live/boucan.proxy.docker
-RUN mkdir -p /etc/letsencrypt/live/boucan.proxy.docker
 
 # dynamically configure configs or user defaults to avoid mounts
 COPY ./docker-run.sh /usr/bin/docker-run.sh
