@@ -61,13 +61,21 @@ export default class Home extends Vue {
         }
         return msg;
     }
+
+    incHttpRequestCount(event: any) {
+        console.log('RECEV HTTP_REQUEST_CREATED');
+        this.$store.dispatch('activity/incHttpRequestCount');
+    }
+    incDnsRequestCount(event: any) {
+        this.$store.dispatch('activity/incDnsRequestCount');
+    }
     created() {
-        bus.$on('HTTP_REQUEST_CREATED', (event: any) => {
-            this.$store.dispatch('activity/incHttpRequestCount');
-        });
-        bus.$on('DNS_REQUEST_CREATED', (event: any) => {
-            this.$store.dispatch('activity/incDNSRequestCount');
-        });
+        bus.$on('HTTP_REQUEST_CREATED', this.incHttpRequestCount);
+        bus.$on('DNS_REQUEST_CREATED', this.incDnsRequestCount);
+    }
+    beforeDestroy() {
+        bus.$off('HTTP_REQUEST_CREATED', this.incHttpRequestCount);
+        bus.$off('DNS_REQUEST_CREATED', this.incDnsRequestCount);
     }
     mounted() {
         let tab: any = null;
