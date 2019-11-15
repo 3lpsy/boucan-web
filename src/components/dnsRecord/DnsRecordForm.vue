@@ -118,16 +118,9 @@ export default class DnsRecordForm extends mixins(CommonMixin) {
                             if (this.mode === 'edit') {
                                 if (this.zoneId && this.zoneId > 0) {
                                     dnsRecord
-                                        .updateDnsRecordForZone(
-                                            this.dnsRecordId,
-                                            this.zoneId,
-                                            data,
-                                        )
+                                        .updateDnsRecordForZone(this.dnsRecordId, this.zoneId, data)
                                         .then(() => {
-                                            bus.$emit('APP_ALERT', {
-                                                text: 'Dns Record Updated',
-                                                type: 'success',
-                                            });
+                                            bus.$emit('DNS_RECORD_UPDATED');
                                             this.disabled = false;
                                             this.$router.push({
                                                 name: 'zone.show',
@@ -143,10 +136,8 @@ export default class DnsRecordForm extends mixins(CommonMixin) {
                                     dnsRecord
                                         .updateDnsRecord(this.dnsRecordId, data)
                                         .then(() => {
-                                            bus.$emit('APP_ALERT', {
-                                                text: 'Dns Record Updated',
-                                                type: 'success',
-                                            });
+                                            bus.$emit('DNS_RECORD_UPDATED');
+
                                             this.disabled = false;
                                             this.$router.push({
                                                 name: 'home',
@@ -161,15 +152,9 @@ export default class DnsRecordForm extends mixins(CommonMixin) {
                             } else {
                                 if (this.zoneId && this.zoneId > 0) {
                                     dnsRecord
-                                        .createDnsRecordForZone(
-                                            this.zoneId,
-                                            data,
-                                        )
+                                        .createDnsRecordForZone(this.zoneId, data)
                                         .then(() => {
-                                            bus.$emit('APP_ALERT', {
-                                                text: 'Dns Record Created',
-                                                type: 'success',
-                                            });
+                                            bus.$emit('DNS_RECORD_CREATED');
                                             this.disabled = false;
                                             this.$router.push({
                                                 name: 'zone.show',
@@ -185,10 +170,8 @@ export default class DnsRecordForm extends mixins(CommonMixin) {
                                     dnsRecord
                                         .createDnsRecord(data)
                                         .then(() => {
-                                            bus.$emit('APP_ALERT', {
-                                                text: 'Dns Record Created',
-                                                type: 'success',
-                                            });
+                                            bus.$emit('DNS_RECORD_CREATED');
+
                                             this.disabled = false;
                                             this.$router.push({
                                                 name: 'zone.show',

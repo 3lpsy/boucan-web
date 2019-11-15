@@ -5,7 +5,7 @@ import { DnsRequestsResponse, DnsRequestResponse } from '@/types';
 class DnsRequestService {
     getDnsRequests(
         page: number = 1,
-        perPage: number = 20,
+        perPage: number = 15,
         sortBy: string = 'id',
         sortDir: string = 'asc',
         includes: string[] = [],
@@ -30,10 +30,7 @@ class DnsRequestService {
         });
     }
 
-    getDnsRequest(
-        dnsRequestId: number,
-        includes?: string[],
-    ): Promise<DnsRequestResponse> {
+    getDnsRequest(dnsRequestId: number, includes?: string[]): Promise<DnsRequestResponse> {
         return new Promise((resolve, reject) => {
             let query = { includes: includes };
             api.http

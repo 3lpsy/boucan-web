@@ -80,10 +80,6 @@ export default class HttpServerCreateForm extends mixins(CommonMixin) {
                                 .updateHttpServer(this.httpServerId, data)
                                 .then(() => {
                                     console.log('emiting app event');
-                                    bus.$emit('APP_ALERT', {
-                                        text: 'Http Server Created',
-                                        type: 'success',
-                                    });
                                     bus.$emit('HTTP_SERVER_UPDATED');
                                     this.disabled = false;
                                     this.$router.push({ name: 'server' });
@@ -97,10 +93,6 @@ export default class HttpServerCreateForm extends mixins(CommonMixin) {
                                 .createHttpServer(data)
                                 .then(() => {
                                     console.log('emiting app event');
-                                    bus.$emit('APP_ALERT', {
-                                        text: 'Http Server Created',
-                                        type: 'success',
-                                    });
                                     bus.$emit('HTTP_SERVER_CREATED');
                                     this.disabled = false;
                                     this.$router.push({ name: 'server' });

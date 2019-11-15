@@ -80,10 +80,6 @@ export default class DnsServerCreateForm extends mixins(CommonMixin) {
                                 .updateDnsServer(this.dnsServerId, data)
                                 .then(() => {
                                     console.log('emiting app event');
-                                    bus.$emit('APP_ALERT', {
-                                        text: 'Dns Server Created',
-                                        type: 'success',
-                                    });
                                     bus.$emit('DNS_SERVER_UPDATED');
                                     this.disabled = false;
                                     this.$router.push({ name: 'server' });
@@ -97,10 +93,6 @@ export default class DnsServerCreateForm extends mixins(CommonMixin) {
                                 .createDnsServer(data)
                                 .then(() => {
                                     console.log('emiting app event');
-                                    bus.$emit('APP_ALERT', {
-                                        text: 'Dns Server Created',
-                                        type: 'success',
-                                    });
                                     bus.$emit('DNS_SERVER_CREATED');
                                     this.disabled = false;
                                     this.$router.push({ name: 'server' });

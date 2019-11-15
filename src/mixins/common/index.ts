@@ -58,10 +58,7 @@ export default class CommonMixin extends Vue {
                 let detail = data.detail;
                 if (Array.isArray(detail)) {
                     for (let item of detail) {
-                        if (
-                            item.loc.includes('body') &&
-                            item.loc.includes('form')
-                        ) {
+                        if (item.loc.includes('body') && item.loc.includes('form')) {
                             let msg = item.msg;
                             let fieldName = item.loc[item.loc.length - 1];
 
@@ -76,10 +73,7 @@ export default class CommonMixin extends Vue {
                             });
                         }
                     }
-                } else if (
-                    typeof detail === 'string' ||
-                    detail instanceof String
-                ) {
+                } else if (typeof detail === 'string' || detail instanceof String) {
                     this.handleGlobalError({
                         status: response.status,
                         message: detail,
@@ -100,7 +94,7 @@ export default class CommonMixin extends Vue {
             options: {
                 title: 'Application Message',
                 variant: 'danger',
-                toaster: 'b-toaster-bottom-right',
+                toaster: 'b-toaster-top-right',
             },
         });
     }
@@ -139,8 +133,6 @@ export default class CommonMixin extends Vue {
     }
 
     truncateWithTrail(target: string, limit: number, trail: string) {
-        return target.length > limit
-            ? target.substr(0, limit - 1) + trail
-            : target;
+        return target.length > limit ? target.substr(0, limit - 1) + trail : target;
     }
 }

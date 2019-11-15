@@ -168,10 +168,8 @@ export default class UserForm extends mixins(CommonMixin, DataTableMixin) {
                         if (this.mode == 'create') {
                             user.createUser(form)
                                 .then(() => {
-                                    bus.$emit('APP_ALERT', {
-                                        text: 'User Created',
-                                        type: 'success',
-                                    });
+                                    bus.$emit('USER_CREATED');
+
                                     this.$emit('form-complete');
                                     this.form = {
                                         email: '',
@@ -192,10 +190,8 @@ export default class UserForm extends mixins(CommonMixin, DataTableMixin) {
                         } else {
                             user.updateUser(this.userId, form)
                                 .then(() => {
-                                    bus.$emit('APP_ALERT', {
-                                        text: 'User Updated',
-                                        type: 'success',
-                                    });
+                                    bus.$emit('USER_UPDATED');
+
                                     this.$emit('form-complete');
                                     this.boot();
                                     // this.$router.push({

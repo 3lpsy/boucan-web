@@ -8,7 +8,7 @@ import moment from 'moment';
 export default class DataTableMixin extends Vue {
     isLoaded = false;
     currentPage = 0;
-    perPage = 20;
+    perPage = 15;
     total = 0;
     sortBy = 'id';
     sortDesc = false;

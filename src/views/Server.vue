@@ -6,12 +6,12 @@
                         :to="{name: 'dns-server.create'}"
         >Create DNS Server</router-link>-->
         <b-container style="padding-top: 10px" class="page">
-            <div class="row" style="margin-bottom: 10px;">
-                <div class="col-md-8 col-xs-12">
+            <div class="row page-header-row">
+                <div class="col-md-7 col-xs-12">
                     <h2>Servers</h2>
                 </div>
 
-                <div class="col-md-4 col-xs-12">
+                <div class="col-md-5 col-xs-12">
                     <router-link
                         style="margin-left:5px"
                         tag="button"

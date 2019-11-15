@@ -192,10 +192,6 @@ export default class ApiTokenForm extends mixins(CommonMixin) {
                                     .createApiToken(data)
                                     .then(() => {
                                         this.disabled = false;
-                                        bus.$emit('APP_ALERT', {
-                                            text: 'Api Token Created',
-                                            type: 'success',
-                                        });
                                         bus.$emit('API_TOKEN_CREATED');
                                         this.$router.push({
                                             name: 'api-token',
@@ -210,10 +206,6 @@ export default class ApiTokenForm extends mixins(CommonMixin) {
                                     .updateApiToken(data)
                                     .then(() => {
                                         this.disabled = false;
-                                        bus.$emit('APP_ALERT', {
-                                            text: 'Api Token updated',
-                                            type: 'success',
-                                        });
                                         bus.$emit('API_TOKEN_UPDATED');
                                         this.$router.push({
                                             name: 'api-token',

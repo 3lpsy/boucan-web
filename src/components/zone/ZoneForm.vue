@@ -207,10 +207,8 @@ export default class ZoneForm extends mixins(CommonMixin, ZoneMixin, DataTableMi
                                     if (this.mode === 'edit') {
                                         zone.updateZone(this.zoneId, form)
                                             .then(() => {
-                                                bus.$emit('APP_ALERT', {
-                                                    text: 'Zone Updated',
-                                                    type: 'success',
-                                                });
+                                                bus.$emit('ZONE_UPDATED');
+
                                                 this.$emit('form-complete');
                                                 this.form = {
                                                     domain: '',
@@ -232,10 +230,8 @@ export default class ZoneForm extends mixins(CommonMixin, ZoneMixin, DataTableMi
                                     } else {
                                         zone.createZone(form)
                                             .then(() => {
-                                                bus.$emit('APP_ALERT', {
-                                                    text: 'Zone Created',
-                                                    type: 'success',
-                                                });
+                                                bus.$emit('ZONE_CREATED');
+
                                                 this.$emit('form-complete');
                                                 this.form = {
                                                     domain: '',

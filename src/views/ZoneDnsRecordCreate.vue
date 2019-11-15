@@ -1,7 +1,7 @@
 <template>
     <div class="page home-page row">
         <b-container style="padding-top: 10px" class="page">
-            <div class="row" style="margin-bottom: 10px;">
+            <div class="row page-header-row">
                 <div class="col-md-9 col-xs-12">
                     <h3 v-if="zone && zone.id">
                         Create DNS Record

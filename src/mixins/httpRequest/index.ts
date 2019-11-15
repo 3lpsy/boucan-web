@@ -8,7 +8,6 @@ export default class HttpRequestMixin extends Vue {
     registeredEvents = [];
     loadData() {}
     registerOnBroadcastHttpRequestCreated() {
-        console.log('registering HTTP_REQUEST_CREATED on http request table');
         bus.$on('HTTP_REQUEST_CREATED', (event: any) => {
             this.loadData();
         });

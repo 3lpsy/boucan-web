@@ -8,7 +8,6 @@ export default class DnsRequestMixin extends Vue {
     registeredEvents = [];
     loadData() {}
     registerOnBroadcastDnsRequestCreated() {
-        console.log('registering DNS_REQUEST_CREATED on dns request table');
         bus.$on('DNS_REQUEST_CREATED', (event: any) => {
             this.loadData();
         });

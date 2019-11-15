@@ -11,13 +11,30 @@ class Broadcast {
     public authEnabled: boolean;
     public bus: Vue;
 
-    constructor(bus: Vue, publicWS: WebSocket, authedWS: WebSocket | null) {
+    constructor(bus: Vue, publicWS: WebSocket | null, authedWS: WebSocket | null) {
         this.bus = bus;
         this.publicWS = publicWS;
         this.authedWS = authedWS;
         this.authEnabled = authedWS ? true : false;
     }
 
+    public authedWSOnError(event: any) {
+        console.log('authed ws on error', event);
+    }
+    public authedWSOnClose(event: any) {
+        console.log('authed ws on close', event);
+        this.bus.$emit('APP_TOAST', {
+            message:
+                'The connection to the authenticated websocket has closed. Please try reconnecting by refreshing the browser.',
+
+            options: {
+                title: 'WebSocket Close: Authenticated',
+                variant: 'danger',
+                toaster: 'b-toaster-top-right',
+                noAutoHide: true,
+            },
+        });
+    }
     public authedWSOnOpen(event: any) {
         console.log('authed ws on open', event);
     }
@@ -50,6 +67,8 @@ class Broadcast {
         this.authedWS = authedWS;
         authedWS.onopen = this.authedWSOnOpen.bind(this);
         authedWS.onmessage = this.authedWSOnMessage.bind(this);
+        authedWS.onerror = this.authedWSOnError.bind(this);
+        authedWS.onclose = this.authedWSOnClose.bind(this);
         this.authEnabled = true;
     }
 
@@ -80,10 +99,28 @@ class Broadcast {
         let msg = { message: 'yo' };
         event.target.send(JSON.stringify(msg));
     }
+    public publicOnError(event: any) {
+        console.log('ws on error', event);
+    }
 
+    public publicOnClose(event: any) {
+        console.log('ws on close', event);
+        this.bus.$emit('APP_TOAST', {
+            message:
+                'The connection to the public websocket has closed. Please try reconnecting by refreshing the browser.',
+            options: {
+                title: 'WebSocket Closed: Public',
+                variant: 'danger',
+                toaster: 'b-toaster-top-right',
+                noAutoHide: true,
+            },
+        });
+    }
     public registerPublicWS() {
         this.publicWS.onmessage = this.publicOnMessage.bind(this);
         this.publicWS.onopen = this.publicOnOpen.bind(this);
+        this.publicWS.onerror = this.publicOnError.bind(this);
+        this.publicWS.onclose = this.publicOnClose.bind(this);
     }
 }
 

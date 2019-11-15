@@ -14,6 +14,7 @@
                 v-if="alerts.length > 0"
                 style="margin-bottom: 0px"
             >{{ alert.text }}</b-alert>
+            <b-toaster name="b-toaster-top-right"></b-toaster>
         </div>
     </div>
 </template>
@@ -35,9 +36,7 @@ export default class AppAlerts extends Vue {
     }
 
     registerOnAlert() {
-        console.log('registering APP_ALERT event on bus');
         if (!this.registeredEvents.includes('APP_ALERT')) {
-            console.log('registering APP_ALERT event on bus');
             bus.$on('APP_ALERT', (alert) => {
                 console.log('receving app alert', alert);
                 if (alert.show === null || alert.show === undefined) {
@@ -61,6 +60,12 @@ export default class AppAlerts extends Vue {
     registerOnToast() {
         if (!this.registeredEvents.includes('APP_TOAST')) {
             bus.$on('APP_TOAST', (toast) => {
+                if (!toast.options) {
+                    toast.options = { toaster: 'b-toaster-top-right' };
+                }
+                if (!toast.options.toaster) {
+                    toast.options.toaster = 'b-toaster-top-right';
+                }
                 this.$bvToast.toast(toast.message, toast.options);
             });
             this.registeredEvents.push('APP_TOAST');
@@ -75,4 +80,7 @@ export default class AppAlerts extends Vue {
 </script>
 
 <style media="screen">
+.b-toaster.b-toaster-top-right {
+    top: 55px !important;
+}
 </style>

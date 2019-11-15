@@ -1,7 +1,7 @@
 <template>
     <div class="page home-page row">
         <b-container style="padding-top: 10px" class="page">
-            <div class="row" style="margin-bottom: 10px;">
+            <div class="row page-header-row">
                 <div class="col-md-12 col-xs-12">
                     <h2 v-if="dnsServerId">Edit DNS Server: {{ dnsServerId }}</h2>
                 </div>

@@ -5,7 +5,7 @@ import { HttpRequestsResponse, HttpRequestResponse } from '@/types';
 class HttpRequestService {
     getHttpRequests(
         page: number = 1,
-        perPage: number = 20,
+        perPage: number = 15,
         sortBy: string = 'id',
         sortDir: string = 'asc',
         includes: string[] = [],
@@ -30,10 +30,7 @@ class HttpRequestService {
         });
     }
 
-    getHttpRequest(
-        httpRequestId: number,
-        includes?: string[],
-    ): Promise<HttpRequestResponse> {
+    getHttpRequest(httpRequestId: number, includes?: string[]): Promise<HttpRequestResponse> {
         return new Promise((resolve, reject) => {
             let query = { includes: includes };
             api.http

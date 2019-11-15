@@ -60,10 +60,7 @@ import { GeneralQS } from '@/queries';
         },
     },
 })
-export default class DnsRecordsTable extends mixins(
-    CommonMixin,
-    DataTableMixin,
-) {
+export default class DnsRecordsTable extends mixins(CommonMixin, DataTableMixin) {
     items = [];
     query = new GeneralQS();
     isLoading = false;
@@ -106,30 +103,26 @@ export default class DnsRecordsTable extends mixins(
 
     destroyRecord(record) {
         dnsRecord.destroyRecord(record.id).then((res) => {
-            bus.$emit('APP_ALERT', {
-                text: 'Dns Record Destroyed',
-                type: 'danger',
-            });
+            bus.$emit('DNS_RECORD_DESTROYED');
+
             this.boot();
         });
     }
 
     loadData() {
         if (this.zoneId && this.zoneId > 0) {
-            return dnsRecord
-                .getDnsRecordsForZone(this.zoneId, this.query)
-                .then((res) => {
-                    let query = new GeneralQS();
-                    query.page = res.pagination.page;
-                    query.per_page = res.pagination.per_page;
-                    query.sort_by = this.query.sort_by;
-                    query.sort_dir = this.query.sort_dir;
-                    this.query = query;
-                    this.total = res.pagination.total;
-                    this.items = res.dns_records;
-                    this.isLoaded = true;
-                    this.isLoading = false;
-                });
+            return dnsRecord.getDnsRecordsForZone(this.zoneId, this.query).then((res) => {
+                let query = new GeneralQS();
+                query.page = res.pagination.page;
+                query.per_page = res.pagination.per_page;
+                query.sort_by = this.query.sort_by;
+                query.sort_dir = this.query.sort_dir;
+                this.query = query;
+                this.total = res.pagination.total;
+                this.items = res.dns_records;
+                this.isLoaded = true;
+                this.isLoading = false;
+            });
         } else {
             return dnsRecord.getDnsRecords(this.query).then((res) => {
                 let query = new GeneralQS();

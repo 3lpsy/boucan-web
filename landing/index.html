@@ -30,7 +30,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="https://github.com/3lpsy/boucan/">
+                            <a class="nav-link" href="https://github.com/3lpsy/boucanpy/">
                                 Github
                             </a>
                         </li>
@@ -64,10 +64,10 @@
                     <div class="col-lg-8 mx-auto">
                         <h2>What is it?</h2>
                         <p class="lead">
-                            Boucan is tool for Bug Bounty Hunters for determining the resolution of DNS payloads. When a
-                            DNS domain is injected into a payload, the targeted asset may resolve the DNS name,
-                            indicating that the asset may be vulnerable to command injection, Server Side Request
-                            Forgery (SSRF), or Local/Remote File Inclusion (LFI/RFI). Boucan ships with:
+                            Boucan is platform to help Bug Bounty Hunters determine if targets resolve DNS/HTTP
+                            payloads. When a DNS domain is injected into a payload, the targeted asset may resolve the
+                            DNS name, indicating that the asset may be vulnerable to command injection, Server Side
+                            Request Forgery (SSRF), or Local/Remote File Inclusion (LFI/RFI). Boucan ships with:
                         </p>
                         <ul>
                             <li>
@@ -139,21 +139,19 @@
                             The following features are currently being worked on:
                         </p>
                         <ul>
+                            <li><s>Easy deployment via docker and docker-compose </s> Done!</li>
                             <li>
-                                Easy deployment via docker and docker-compose
+                                <s>
+                                    Simple provisioning templating, deploying to AWS via Packer, Terraform, and
+                                    Letsencrypt
+                                </s>
+                                Done!
                             </li>
-                            <li>
-                                Simple provisioning templating, deploying to AWS via Packer, Terraform, and Letsencrypt
-                            </li>
-                            <li>
-                                Instant feedback via WebSockets
-                            </li>
+                            <li><s>Instant feedback via WebSockets </s> Done!</li>
                             <li>
                                 Option to receive Email Notifications upon resolution
                             </li>
-                            <li>
-                                An HTTP and HTTPs server to determine the resolution of URLs
-                            </li>
+                            <li><s>An HTTP and HTTPs server to determine the resolution of URLs </s> Done!</li>
                             <li>
                                 An SMTP Server to test for SMTP resolution
                             </li>

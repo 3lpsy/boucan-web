@@ -6,17 +6,17 @@ import { AuthGetters } from './getters';
 import { AuthMutations } from './mutations';
 
 export const AuthModule: Module<IAuthState, IState> = {
-  namespaced: true,
-  actions: {
-    ...AuthActions,
-  },
-  getters: {
-    ...AuthGetters,
-  },
-  state: {
-    ...AuthDefaultState(),
-  },
-  mutations: {
-    ...AuthMutations,
-  },
+    namespaced: true,
+    actions: {
+        ...AuthActions,
+    },
+    getters: {
+        ...AuthGetters,
+    },
+    state: {
+        ...AuthDefaultState(),
+    },
+    mutations: {
+        ...AuthMutations,
+    },
 };
