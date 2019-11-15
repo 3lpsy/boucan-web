@@ -1,6 +1,17 @@
 # Assets Container
-FROM 3lpsy/bountydns-webui:latest as build-stage
+FROM alpine:3.10 as build-stage
+RUN mkdir -p /webui
+RUN rm -rf /var/cache/apk/* \
+    && rm -rf /tmp/*
+RUN apk update
+RUN apk add --update nodejs npm
+# RUN npm install -g typescript
+RUN npm install -g @vue/cli
+COPY ./package.json /webui/package.json
 WORKDIR /webui
+RUN npm install
+
+COPY . /webui
 
 ARG VUE_APP_API_BASE
 ARG VUE_APP_API_URL
@@ -24,24 +35,25 @@ ENV API_BACKEND_PROTO="https"
 ENV API_BACKEND_HOST="api"
 ENV API_BACKEND_PORT="8080"
 ENV DEBUG_CONF="0"
-ENV TLS_DIR="/etc/letsencrypt/live/bountydns.proxy.docker"
+ENV TLS_DIR="/etc/letsencrypt/live/boucan.proxy.docker"
 
 # for development, make /var/www/nginx/webui a volume
 RUN mkdir /nginxconfs
-COPY insecure.nginx.conf /nginxconfs
+COPY nginx/insecure.nginx.conf /nginxconfs
 
 # TODO: make prod actually prod
-COPY ssl.nginx.conf /nginxconfs
+COPY nginx/ssl.nginx.conf /nginxconfs
 
 RUN chown -R nginx:nginx /nginxconfs
 
 RUN mkdir -p /var/www/app
 COPY --from=build-stage /webui/dist/ /var/www/app/webui
-COPY --from=build-stage /landing/ /var/www/app/landing
+COPY --from=build-stage /webui/landing/ /var/www/app/landing
 
 RUN chown -R nginx:nginx /var/www
 
-RUN mkdir -p /etc/letsencrypt/live/bountydns.proxy.docker
+RUN mkdir -p /etc/letsencrypt/live/boucan.proxy.docker
+RUN mkdir -p /etc/letsencrypt/live/boucan.proxy.docker
 
 # dynamically configure configs or user defaults to avoid mounts
 COPY ./docker-run.sh /usr/bin/docker-run.sh
